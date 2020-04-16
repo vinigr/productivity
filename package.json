@@ -1,0 +1,9 @@
+{
+  "name": "productivity",
+  "version": "0.1.0",
+  "description": "A productivity manager for developers and others persons who need to self manage their time.",
+  "main": "index.js",
+  "author": "Vinícios Oliveira Grama <vinyirun1@gmail.com> & Daniel Costa Carvalho <danielcostacarvalho@gmail.com>",
+  "license": "BSD-3-Clause",
+  "private": true
+}
