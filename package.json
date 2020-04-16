@@ -5,6 +5,11 @@
   "main": "index.js",
   "author": "Vinícios Oliveira Grama <vinyirun1@gmail.com> & Daniel Costa Carvalho <danielcostacarvalho@gmail.com>",
   "license": "BSD-3-Clause",
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
+  },
   "private": true,
   "devDependencies": {
     "@commitlint/cli": "^8.3.5",
