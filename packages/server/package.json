@@ -1,0 +1,21 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "BSD-3-Clause",
+  "scripts": {
+    "clear": "rimraf ./dist",
+    "start": "yarn clear && webpack --env.mode=dev"
+  },
+  "dependencies": {
+    "@productivity/babel": "*"
+  },
+  "devDependencies": {
+    "auto-reload-webpack-plugin": "^1.1.0",
+    "rimraf": "^3.0.2",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11",
+    "webpack-merge": "^4.2.2",
+    "webpack-node-externals": "^1.7.2"
+  }
+}
