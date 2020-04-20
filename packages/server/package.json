@@ -5,7 +5,8 @@
   "license": "BSD-3-Clause",
   "scripts": {
     "clear": "rimraf ./dist",
-    "start": "yarn clear && webpack --env.mode=dev"
+    "start": "yarn clear && webpack --env.mode=dev",
+    "test": "jest"
   },
   "dependencies": {
     "@productivity/babel": "*",
@@ -14,6 +15,8 @@
   "devDependencies": {
     "auto-reload-webpack-plugin": "^1.1.0",
     "babel-loader": "^8.1.0",
+    "jest-environment-node": "^25.4.0",
+    "mongodb-memory-server": "^6.5.2",
     "rimraf": "^3.0.2",
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11",
