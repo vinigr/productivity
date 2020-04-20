@@ -8,10 +8,12 @@
     "start": "yarn clear && webpack --env.mode=dev"
   },
   "dependencies": {
-    "@productivity/babel": "*"
+    "@productivity/babel": "*",
+    "graphql": "^15.0.0"
   },
   "devDependencies": {
     "auto-reload-webpack-plugin": "^1.1.0",
+    "babel-loader": "^8.1.0",
     "rimraf": "^3.0.2",
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11",
