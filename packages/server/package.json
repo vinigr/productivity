@@ -9,7 +9,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@koa/router": "^9.0.0",
+    "@koa/router": "^8.0.8",
     "@productivity/babel": "*",
     "graphql": "^15.0.0",
     "graphql-playground-middleware-koa": "^1.6.13",
