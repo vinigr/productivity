@@ -39,6 +39,13 @@ router.all(
   graphqlServer
 );
 
+router.all(
+  '/graphiql',
+  koaPlayground({
+    endpoint: '/graphql',
+  }),
+);
+
 app.use(router.routes()).use(router.allowedMethods());
 app.use(cors());
 
