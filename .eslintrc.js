@@ -4,7 +4,7 @@ module.exports = {
     es6: true,
     node: true,
   },
-  extends: ['plugin:react/recommended', 'airbnb'],
+  extends: ['plugin:react/recommended', 'airbnb', 'plugin:@typescript-eslint/recommended'],
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
@@ -18,7 +18,12 @@ module.exports = {
     sourceType: 'module',
   },
   plugins: ['react', '@typescript-eslint'],
-  rules: { 'import/extensions': ['off', 'never', { ts: 'never' }] },
+  rules: {
+    indent: 'off',
+    'no-underscore-dangle': [2, { allow: ['_id'] }],
+    'import/extensions': ['off', 'never', { ts: 'never' }],
+    '@typescript-eslint/camelcase': ['off', { ignoreDestructuring: true }],
+  },
   settings: {
     'import/resolver': {
       node: {
