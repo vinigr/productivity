@@ -9,7 +9,7 @@ import logger from 'koa-logger';
 
 import koaPlayground from 'graphql-playground-middleware-koa';
 
-import { schema } from './schema'
+import { schema } from './schema';
 
 const app = new Koa<any, Context>();
 
@@ -27,17 +27,14 @@ app.use(bodyParser());
 
 const graphqlServer = graphqlHttp({
   schema,
-  graphiql: process.env.NODE_ENV === 'development'
-})
+  graphiql: process.env.NODE_ENV === 'development',
+});
 
 router.get('/', (ctx: Context) => {
   ctx.body = 'Hello';
 });
 
-router.all(
-  '/graphql',
-  graphqlServer
-);
+router.all('/graphql', graphqlServer);
 
 router.all(
   '/graphiql',
