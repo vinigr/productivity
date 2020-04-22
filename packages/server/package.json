@@ -1,5 +1,5 @@
 {
-  "name": "server",
+  "name": "@productivity/server",
   "version": "1.0.0",
   "main": "index.js",
   "license": "BSD-3-Clause",
@@ -11,6 +11,7 @@
   "dependencies": {
     "@koa/router": "^8.0.8",
     "@productivity/babel": "*",
+    "dotenv": "^8.2.0",
     "graphql": "^15.0.0",
     "graphql-playground-middleware-koa": "^1.6.13",
     "koa": "^2.11.0",
@@ -21,6 +22,7 @@
     "koa-logger": "^3.2.1"
   },
   "devDependencies": {
+    "@types/dotenv": "^8.2.0",
     "@types/koa": "^2.11.3",
     "@types/koa__router": "^8.0.2",
     "auto-reload-webpack-plugin": "^1.1.0",
