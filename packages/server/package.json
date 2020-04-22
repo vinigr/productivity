@@ -15,6 +15,7 @@
     "dotenv": "^8.2.0",
     "graphql": "^15.0.0",
     "graphql-playground-middleware-koa": "^1.6.13",
+    "graphql-relay": "^0.6.0",
     "koa": "^2.11.0",
     "koa-bodyparser": "^4.3.0",
     "koa-cors": "^0.0.16",
@@ -26,6 +27,7 @@
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
     "@types/dotenv": "^8.2.0",
+    "@types/graphql-relay": "^0.6.0",
     "@types/koa": "^2.11.3",
     "@types/koa__router": "^8.0.2",
     "@types/mongoose": "^5.7.12",
