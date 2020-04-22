@@ -21,6 +21,7 @@ module.exports = {
   rules: {
     indent: 'off',
     'no-underscore-dangle': [2, { allow: ['_id'] }],
+    '@typescript-eslint/explicit-function-return-type': 'off',
     'import/extensions': ['off', 'never', { ts: 'never' }],
     '@typescript-eslint/camelcase': ['off', { ignoreDestructuring: true }],
   },
