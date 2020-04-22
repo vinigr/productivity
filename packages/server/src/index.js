@@ -1,12 +1,14 @@
 import { createServer } from 'http';
 
+import { GRAPHQL_PORT } from './common/config';
+
 import app from './app';
 
 const server = createServer(app.callback());
 
-server.listen(3333, () => {
+server.listen(GRAPHQL_PORT, () => {
   // eslint-disable-next-line no-console
-  console.info(`Server started on port: ${3333}`);
+  console.info(`Server started on port: ${GRAPHQL_PORT}`);
 });
 
 if (module.hot) {
