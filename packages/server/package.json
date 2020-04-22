@@ -12,6 +12,7 @@
     "@koa/router": "^8.0.8",
     "@productivity/babel": "*",
     "bcryptjs": "^2.4.3",
+    "dataloader": "^2.0.0",
     "dotenv": "^8.2.0",
     "graphql": "^15.0.0",
     "graphql-playground-middleware-koa": "^1.6.13",
