@@ -9,6 +9,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@entria/graphql-mongoose-loader": "^4.3.0",
     "@koa/router": "^8.0.8",
     "@productivity/babel": "*",
     "bcryptjs": "^2.4.3",
