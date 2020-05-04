@@ -4,6 +4,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import * as RRD from 'react-router-dom';
 
 const Login = lazy(() => import('./modules/Auth/Login'));
+const Dashboard = lazy(() => import('./modules/Dashboard/Dashboard'));
 
 const Routes = (RRD as any).Routes;
 
@@ -13,6 +14,8 @@ const RoutesApp = () => {
       <Suspense fallback={<span>loading...</span>}>
         <Routes>
           <Route path="/login" element={<Login />} />
+
+          <Route path="/" element={<Dashboard />} />
         </Routes>
       </Suspense>
     </BrowserRouter>
