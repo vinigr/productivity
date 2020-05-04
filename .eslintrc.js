@@ -24,6 +24,7 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': 'off',
     'import/extensions': ['off', 'never', { ts: 'never' }],
     '@typescript-eslint/camelcase': ['off', { ignoreDestructuring: true }],
+    'max-len': ['error', { code: 120 }],
   },
   settings: {
     'import/resolver': {
