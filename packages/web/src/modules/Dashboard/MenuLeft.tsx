@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled, { css } from 'styled-components';
 import { Home, InsertChart, BrightnessMedium, SettingsPower } from '@styled-icons/material-rounded';
+import ThemeContext from '../../contexts/ThemeContext';
 
 const MenuLeft = () => {
+  const theme = useContext(ThemeContext);
+
   return (
     <Wrapper>
       <GroupIcons>
@@ -11,7 +14,10 @@ const MenuLeft = () => {
       </GroupIcons>
 
       <GroupIcons>
-        <BrightnessMediumIcon />
+        <Button onClick={theme?.handleTheme}>
+          <BrightnessMediumIcon />
+        </Button>
+
         <PowerIcon />
       </GroupIcons>
     </Wrapper>
@@ -36,6 +42,12 @@ const GroupIcons = styled.div`
   flex-direction: column;
 `;
 
+const Button = styled.button`
+  border: none;
+  margin-bottom: 8px;
+  background-color: transparent;
+`;
+
 const StyleIcon = css`
   color: ${(props) => props.theme.icon};
   width: 36px;
@@ -52,7 +64,6 @@ const InsertChartIcon = styled(InsertChart)`
 
 const BrightnessMediumIcon = styled(BrightnessMedium)`
   ${StyleIcon};
-  margin-bottom: 8px;
 `;
 
 const PowerIcon = styled(SettingsPower)`

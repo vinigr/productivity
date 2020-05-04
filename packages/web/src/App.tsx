@@ -1,16 +1,15 @@
 import React from 'react';
-import { ThemeProvider } from 'styled-components';
 
 import GlobalStyles from './styles/global';
-import { light, dark } from './styles/theme';
 import Routes from './routes';
+import ThemeContextProvider from './contexts/ThemeProvider';
 
 function App() {
   return (
-    <ThemeProvider theme={dark}>
+    <ThemeContextProvider>
       <Routes />
       <GlobalStyles />
-    </ThemeProvider>
+    </ThemeContextProvider>
   );
 }
 
