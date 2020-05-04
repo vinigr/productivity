@@ -3,6 +3,7 @@ export const light = {
   immutableBoxes: '#EEEEEE',
   titleBox: '#F6F6F6',
   modalBackground: '#fff',
+  icon: '#333333',
 };
 
 export const dark = {
@@ -10,4 +11,5 @@ export const dark = {
   immutableBoxes: '#0D0D0D',
   titleBox: 'rgba(18, 18, 18, 0.5)',
   modalBackground: '#050505',
+  icon: '#F2F2F2',
 };

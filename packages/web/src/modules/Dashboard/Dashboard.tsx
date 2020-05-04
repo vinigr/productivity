@@ -1,8 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
+import MenuLeft from './MenuLeft';
 
 const Dashboard = () => {
-  return <Wrapper>Dashboard</Wrapper>;
+  return (
+    <Wrapper>
+      <MenuLeft></MenuLeft>Dashboard
+    </Wrapper>
+  );
 };
 
 export default Dashboard;
