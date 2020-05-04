@@ -42,8 +42,8 @@ export const load = async (context: GraphQLContext, id: string | Types.ObjectId)
   }
 };
 
-export const loadByLogin = async (context: GraphQLContext, login: string): Promise<User | null> => {
-  const user = await UserModel.findOne({ login });
+export const loadByEmail = async (context: GraphQLContext, email: string): Promise<User | null> => {
+  const user = await UserModel.findOne({ email });
 
   if (!user) return null;
 
