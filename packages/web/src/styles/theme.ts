@@ -4,6 +4,7 @@ export const light = {
   titleBox: '#F6F6F6',
   modalBackground: '#fff',
   icon: '#333333',
+  titleBoxRight: '#121212',
 };
 
 export const dark = {
@@ -12,4 +13,5 @@ export const dark = {
   titleBox: 'rgba(18, 18, 18, 0.5)',
   modalBackground: '#050505',
   icon: '#F2F2F2',
+  titleBoxRight: '#fff',
 };

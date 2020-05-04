@@ -26,7 +26,7 @@ const Wrapper = styled.nav`
   align-items: center;
   justify-content: space-between;
   padding: 14px 0;
-  background-color: ${(props) => props.theme.background};
+  background-color: ${(props) => props.theme.immutableBoxes};
   height: 100vh;
   width: 50px;
 `;
