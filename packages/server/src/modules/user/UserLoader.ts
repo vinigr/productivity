@@ -1,17 +1,15 @@
 import DataLoader from 'dataloader';
-import mongoose, { Types } from 'mongoose';
+import { Types } from 'mongoose';
 import { mongooseLoader } from '@entria/graphql-mongoose-loader';
 
 import { GraphQLContext } from '../../TypeDefinition';
 
 import UserModel, { IUser } from './UserModel';
 
-declare type ObjectId = mongoose.Schema.Types.ObjectId;
-
 export default class User {
   id: string;
 
-  _id: ObjectId;
+  _id: Types.ObjectId;
 
   name: string;
 
@@ -31,7 +29,7 @@ export default class User {
 
 export const getLoader = () => new DataLoader((ids: ReadonlyArray<string>) => mongooseLoader(UserModel, ids));
 
-export const load = async (context: GraphQLContext, id: string | ObjectId): Promise<User | null> => {
+export const load = async (context: GraphQLContext, id: string | Types.ObjectId): Promise<User | null> => {
   if (!id || id !== 'string') {
     return null;
   }
