@@ -5,7 +5,7 @@ export default new GraphQLObjectType({
   fields: () => ({
     hello: {
       type: GraphQLString,
-      resolve: () => 'Hello'
-    }
-  })
-})
+      resolve: () => 'Hello',
+    },
+  }),
+});
