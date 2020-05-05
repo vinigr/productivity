@@ -1,5 +1,7 @@
 import React, { useContext } from 'react';
 import styled, { css } from 'styled-components';
+import { Link } from 'react-router-dom';
+
 import { Home, InsertChart, BrightnessMedium, SettingsPower } from '@styled-icons/material-rounded';
 import ThemeContext from '../../contexts/ThemeContext';
 
@@ -9,7 +11,10 @@ const MenuLeft = () => {
   return (
     <Wrapper>
       <GroupIcons>
-        <HomeIcon />
+        <Link to="home">
+          <HomeIcon />
+        </Link>
+
         <InsertChartIcon />
       </GroupIcons>
 

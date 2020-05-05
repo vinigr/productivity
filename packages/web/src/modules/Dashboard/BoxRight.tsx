@@ -19,7 +19,7 @@ const Box = () => {
 
 export default Box;
 
-const Wrapper = styled.nav`
+const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding: 20px 0;

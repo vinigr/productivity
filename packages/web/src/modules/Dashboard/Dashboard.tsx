@@ -21,6 +21,7 @@ export default Dashboard;
 
 const Wrapper = styled.div`
   display: flex;
+  width: 100vw;
   justify-content: space-between;
   background-color: ${(props) => props.theme.background};
 `;
