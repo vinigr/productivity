@@ -8,11 +8,11 @@ const Login = () => {
       <Form>
         <Title>Login</Title>
         <Label>E-mail</Label>
-        <Input type="email" />
+        <Input type="email" required />
         <Label>Senha</Label>
-        <Input type="password" />
+        <Input type="password" required />
         <Options>
-          <LinkChangeAuth to="register">Cadastrar-se</LinkChangeAuth>
+          <LinkChangeAuth to="/register">Cadastrar-se</LinkChangeAuth>
           <ButtonAdd>
             Entrar
             <ArrowIcon />

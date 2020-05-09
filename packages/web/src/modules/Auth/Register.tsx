@@ -8,13 +8,13 @@ const Register = () => {
       <Form>
         <Title>Cadastro</Title>
         <Label>Nome completo</Label>
-        <Input type="text" />
+        <Input type="text" required />
         <Label>E-mail</Label>
-        <Input type="email" />
+        <Input type="email" required />
         <Label>Senha</Label>
-        <Input type="password" />
+        <Input type="password" required />
         <Options>
-          <LinkChangeAuth to="login">Fazer login</LinkChangeAuth>
+          <LinkChangeAuth to="/login">Fazer login</LinkChangeAuth>
           <ButtonAdd>
             Cadastrar
             <ArrowIcon />
