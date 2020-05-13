@@ -17,7 +17,7 @@
     "react-scripts": "3.4.1",
     "styled-components": "^5.1.0",
     "styled-react-modal": "^2.0.1",
-    "typescript": "~3.7.2"
+    "typescript": "^3.9.2"
   },
   "scripts": {
     "start": "react-scripts start",
