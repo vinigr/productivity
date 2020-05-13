@@ -1,18 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
 
+import { ThemeProvider as ThemeMaterial } from '@material-ui/styles';
+import { createMuiTheme } from '@material-ui/core';
+
 import { light, dark } from '../styles/theme';
 
 import ThemeContext from './ThemeContext';
 
 const STORAGE_KEY = 'THEME';
 
-type Props = {
+interface Props {
   children: React.ReactNode;
-};
+}
 
 const ThemeContextProvider = ({ children }: Props) => {
-  const [theme, setTheme] = useState<string>();
+  const [theme, setTheme] = useState<'dark' | 'light'>();
 
   useEffect(() => {
     (() => {
@@ -21,7 +24,7 @@ const ThemeContextProvider = ({ children }: Props) => {
       if (!data) {
         setTheme('dark');
         localStorage.setItem(STORAGE_KEY, 'dark');
-      } else {
+      } else if (data === 'light' || data === 'dark') {
         setTheme(data);
       }
     })();
@@ -37,6 +40,12 @@ const ThemeContextProvider = ({ children }: Props) => {
     }
   };
 
+  const materialtheme = createMuiTheme({
+    palette: {
+      type: theme,
+    },
+  });
+
   return (
     <ThemeContext.Provider
       value={{
@@ -44,7 +53,9 @@ const ThemeContextProvider = ({ children }: Props) => {
         handleTheme,
       }}
     >
-      <ThemeProvider theme={theme === 'light' ? light : dark}>{children}</ThemeProvider>
+      <ThemeProvider theme={theme === 'light' ? light : dark}>
+        <ThemeMaterial theme={materialtheme}>{children}</ThemeMaterial>
+      </ThemeProvider>
     </ThemeContext.Provider>
   );
 };
