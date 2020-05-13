@@ -1,13 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 import { AddBox } from '@styled-icons/material-rounded';
+import { Link } from 'react-router-dom';
 
 const Box = () => {
   return (
     <Wrapper>
       <WrapperTitle>
         <Title>Meus projetos</Title>
-        <AddBoxIcon />
+        <Link to="/new-project">
+          <AddBoxIcon />
+        </Link>
       </WrapperTitle>
       <WrapperTitle>
         <Title>Minhas atividades</Title>
@@ -24,8 +27,13 @@ const Wrapper = styled.div`
   flex-direction: column;
   padding: 20px 0;
   background-color: ${(props) => props.theme.immutableBoxes};
-  height: 100vh;
+  min-height: 100vh;
+  height: 100%;
   width: 280px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
 `;
 
 const WrapperTitle = styled.div`

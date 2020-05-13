@@ -40,6 +40,10 @@ const Wrapper = styled.nav`
   background-color: ${(props) => props.theme.immutableBoxes};
   height: 100vh;
   width: 50px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
 `;
 
 const GroupIcons = styled.div`
