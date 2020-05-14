@@ -12,8 +12,4 @@ const Home = () => {
 
 export default Home;
 
-const Wrapper = styled.section`
-  display: flex;
-  flex-direction: column;
-  width: calc(100% - 330px);
-`;
+const Wrapper = styled.div``;
