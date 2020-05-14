@@ -5,6 +5,16 @@
   "author": "Vinícios Oliveira Grama <vinyirun1@gmail.com> & Daniel Costa Carvalho <danielcostacarvalho@gmail.com>",
   "license": "BSD-3-Clause",
   "private": true,
+  "lint-staged": {
+    "*.{ts,tsx,js}": [
+      "yarn prettier --write",
+      "yarn lint"
+    ],
+    "package.json": [
+      "yarn prettier --write",
+      "yarn sort-package-json"
+    ]
+  },
   "dependencies": {
     "@date-io/date-fns": "1.x",
     "@material-ui/core": "^4.9.14",
@@ -53,6 +63,8 @@
     "@types/react-router-dom": "^5.1.5",
     "@types/styled-components": "^5.1.0",
     "@types/styled-react-modal": "^1.2.0",
-    "prettier": "^2.0.5"
+    "lint-staged": "^10.2.2",
+    "prettier": "^2.0.5",
+    "sort-package-json": "^1.42.2"
   }
 }
