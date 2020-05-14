@@ -9,6 +9,7 @@ export const light = {
   titleBoxRight: '#121212',
   text: '#131313',
   buttonBoxTop: '#fff',
+  border: '#9e9e9e',
 };
 
 export const dark = {
@@ -22,4 +23,5 @@ export const dark = {
   titleBoxRight: '#fff',
   text: '#fff',
   buttonBoxTop: '#030303',
+  border: '#484849',
 };
