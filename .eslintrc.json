@@ -1,16 +1,14 @@
 {
-  "eslintConfig": {
-    "extends": ["react-app", "shared-config"],
-    "rules": {
-      "additional-rule": "warn"
-    },
-    "overrides": [
-      {
-        "files": ["**/*.ts?(x)"],
-        "rules": {
-          "additional-typescript-only-rule": "warn"
-        }
-      }
-    ]
+  "env": {
+    "commonjs": true,
+    "es6": true,
+    "node": true
+  },
+  "extends": "eslint:recommended",
+  "parserOptions": {
+    "ecmaVersion": 2018
+  },
+  "rules": {
+    "no-console": "error"
   }
 }
