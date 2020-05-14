@@ -14,7 +14,9 @@ const Box = () => {
       </WrapperTitle>
       <WrapperTitle>
         <Title>Minhas atividades</Title>
-        <AddBoxIcon />
+        <Link to="/new-activity">
+          <AddBoxIcon />
+        </Link>
       </WrapperTitle>
     </Wrapper>
   );

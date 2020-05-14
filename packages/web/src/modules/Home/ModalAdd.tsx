@@ -21,7 +21,7 @@ const ModalAdd = ({ isOpen, toggleModal }: ModalProps) => {
           <TextLink>Projeto</TextLink>
           <NoteIcon />
         </LinkModal>
-        <LinkModal to="/new-task">
+        <LinkModal to="/new-activity">
           <TextLink>Atividade</TextLink>
           <BookmarkIcon />
         </LinkModal>

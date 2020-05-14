@@ -32,6 +32,7 @@ const Content = styled.section`
   flex-direction: column;
   min-height: 100vh;
   width: calc(100% - 330px);
+  max-width: calc(100% - 330px);
   margin-left: 50px;
   margin-right: 280px;
   background-color: ${(props) => props.theme.background};
