@@ -1,50 +1,56 @@
 {
-  "name": "productivity",
+  "name": "web",
   "version": "0.1.0",
   "description": "A productivity manager for developers and others persons who need to self manage their time.",
-  "main": "index.js",
   "author": "Vinícios Oliveira Grama <vinyirun1@gmail.com> & Daniel Costa Carvalho <danielcostacarvalho@gmail.com>",
   "license": "BSD-3-Clause",
-  "workspaces": {
-    "packages": [
-      "packages/*"
-    ]
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
-  },
   "private": true,
-  "devDependencies": {
-    "@commitlint/cli": "^8.3.5",
-    "@commitlint/config-conventional": "^8.3.4",
-    "@typescript-eslint/eslint-plugin": "^2.28.0",
-    "@typescript-eslint/parser": "^2.28.0",
-    "cz-conventional-changelog": "3.1.0",
-    "eslint": "^6.8.0",
-    "eslint-config-airbnb": "^18.1.0",
-    "eslint-import-resolver-typescript": "^2.0.0",
-    "eslint-plugin-import": "^2.20.2",
-    "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-react": "^7.19.0",
-    "eslint-plugin-react-hooks": "^2.5.1",
-    "husky": "^4.2.5",
-    "jest": "^25.4.0",
-    "jest-cli": "^25.4.0",
-    "prettier": "^2.0.4",
+  "dependencies": {
+    "@date-io/date-fns": "1.x",
+    "@material-ui/core": "^4.9.14",
+    "@material-ui/pickers": "^3.2.10",
+    "@styled-icons/material-rounded": "^10.0.0",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "@types/jest": "^25.2.1",
+    "@types/node": "^12.0.0",
+    "@types/react": "^16.9.0",
+    "date-fns": "^2.13.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-router": "^6.0.0-alpha.4",
+    "react-router-dom": "^6.0.0-alpha.4",
+    "react-scripts": "3.4.1",
+    "styled-components": "^5.1.0",
+    "styled-react-modal": "^2.0.1",
     "typescript": "^3.9.2"
   },
-  "dependencies": {
-    "eslint-config-prettier": "^6.10.1",
-    "eslint-plugin-prettier": "^3.1.3"
-  },
   "scripts": {
-    "test": "jest"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@types/react-dom": "^16.9.7",
+    "@types/react-router-dom": "^5.1.5",
+    "@types/styled-components": "^5.1.0",
+    "@types/styled-react-modal": "^1.2.0"
   }
 }
