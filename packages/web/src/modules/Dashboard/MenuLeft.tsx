@@ -1,12 +1,19 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
 
 import { Home, InsertChart, BrightnessMedium, SettingsPower } from '@styled-icons/material-rounded';
 import ThemeContext from '../../contexts/ThemeContext';
+import ModalExit from './ModalExit';
 
 const MenuLeft = () => {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
   const theme = useContext(ThemeContext);
+
+  const toggleModal = () => {
+    setModalIsOpen(!modalIsOpen);
+  };
 
   return (
     <Wrapper>
@@ -23,8 +30,12 @@ const MenuLeft = () => {
           <BrightnessMediumIcon />
         </Button>
 
-        <PowerIcon />
+        <Button onClick={toggleModal}>
+          <PowerIcon />
+        </Button>
       </GroupIcons>
+
+      <ModalExit isOpen={modalIsOpen} toggleModal={toggleModal} />
     </Wrapper>
   );
 };
