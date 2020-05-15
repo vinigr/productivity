@@ -18,7 +18,7 @@ const MenuLeft = () => {
   return (
     <Wrapper>
       <GroupIcons>
-        <Link to="home">
+        <Link to="/">
           <HomeIcon />
         </Link>
 
