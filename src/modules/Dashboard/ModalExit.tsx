@@ -1,9 +1,11 @@
 import React from 'react';
 import Modal from 'styled-react-modal';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 import ButtonClose from '../common/ButtonClose';
-import { useNavigate } from 'react-router-dom';
+
+import AuthService from '../../services/auth';
 
 interface ModalProps {
   isOpen: boolean;
@@ -14,6 +16,7 @@ const ModalExit = ({ isOpen, toggleModal }: ModalProps) => {
   const navigate = useNavigate();
 
   const logout = () => {
+    AuthService.logout();
     navigate('/login');
   };
 
