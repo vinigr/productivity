@@ -1,25 +1,65 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import { KeyboardDatePicker } from '@material-ui/pickers';
 import { Select, MenuItem } from '@material-ui/core';
-import NewActivity from '../common/NewActivity';
+import { useSnackbar } from 'notistack';
+import { useNavigate } from 'react-router';
+
+import { Wrapper, Input, Label, TextArea, ButtonAdd } from './styles';
+
+import api from '../../services/api';
+import Loading from '../common/Loading';
 
 const Form = () => {
-  const [scope, setScope] = useState<string>('t');
+  const [name, setName] = useState<string>('');
+  const [description, setDescription] = useState<string>('');
+  const [scope, setScope] = useState<string>('work');
   const [initialDate, setInitialDate] = useState<Date | null>(new Date());
-  const [finalDate, setFinalDate] = useState<Date | null>(new Date());
-  const [isOpen, setIsOpen] = useState(false);
+  const [finalDate, setFinalDate] = useState<Date | null>(null);
 
-  const toggleModal = () => {
-    setIsOpen(!isOpen);
+  const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar();
+
+  const registerProject = async (e: any) => {
+    e.preventDefault();
+
+    if (!name) {
+      return enqueueSnackbar('O nome é obrigatório!', { variant: 'error' });
+    }
+
+    setLoading(true);
+
+    try {
+      const { data } = await api.post('projects', {
+        name,
+        description,
+        scope,
+        initial_date: initialDate,
+        final_date: finalDate,
+      });
+
+      enqueueSnackbar('Projeto criado com sucesso!', { variant: 'success' });
+      setLoading(false);
+
+      navigate(`/project/${data.id}`);
+    } catch (error) {
+      setLoading(false);
+
+      enqueueSnackbar('Erro ao cadastrar projeto!', { variant: 'error' });
+    }
   };
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <Wrapper>
       <Label>Nome</Label>
-      <Input />
+      <Input type="name" value={name} onChange={(e) => setName(e.target.value)} />
       <Label>Descrição</Label>
-      <TextArea />
+      <TextArea value={description} onChange={(e) => setDescription(e.target.value)} />
       <Label>Escopo</Label>
       <Select
         variant="outlined"
@@ -27,9 +67,9 @@ const Form = () => {
         onChange={(e: any) => setScope(e.target.value)}
         style={{ width: 200, marginBottom: 14 }}
       >
-        <MenuItem value="t">Trabalho</MenuItem>
-        <MenuItem value="e">Estudo</MenuItem>
-        <MenuItem value="p">Pessoal</MenuItem>
+        <MenuItem value="work">Trabalho</MenuItem>
+        <MenuItem value="study">Estudo</MenuItem>
+        <MenuItem value="personal">Pessoal</MenuItem>
       </Select>
       <Label>Data inicial</Label>
       <KeyboardDatePicker
@@ -53,77 +93,9 @@ const Form = () => {
         onChange={setFinalDate}
         style={{ width: 200, marginBottom: 14 }}
       />
-      <Label>Atividades</Label>
-      <ButtonAddActivity onClick={toggleModal}>Adicionar</ButtonAddActivity>
-      <NewActivity isOpen={isOpen} toggleModal={toggleModal} />
+      <ButtonAdd onClick={registerProject}>Criar projeto</ButtonAdd>
     </Wrapper>
   );
 };
 
 export default Form;
-
-const Wrapper = styled.section`
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-  width: 60%;
-  margin-top: 60px;
-`;
-
-const Label = styled.label`
-  color: ${(props) => props.theme.text};
-  margin-bottom: 6px;
-  font-size: 14px;
-`;
-
-const Input = styled.input`
-  display: flex;
-  flex-direction: column;
-  background-color: transparent;
-  color: ${(props) => props.theme.text};
-  border: 1px solid ${(props) => props.theme.border};
-  padding: 8px;
-  height: 40px;
-  margin-bottom: 14px;
-  font-size: 18px;
-  border-radius: 4px;
-
-  &:focus {
-    border-color: ${(props) => props.theme.text};
-  }
-`;
-
-const TextArea = styled.textarea`
-  display: flex;
-  flex-direction: column;
-  background-color: transparent;
-  color: ${(props) => props.theme.text};
-  border: 1px solid ${(props) => props.theme.border};
-  padding: 8px;
-  height: 160px;
-  margin-bottom: 14px;
-  font-size: 18px;
-  resize: none;
-  border-radius: 4px;
-
-  &:focus {
-    border-color: ${(props) => props.theme.text};
-  }
-`;
-
-const ButtonAddActivity = styled.button`
-  border-radius: 2px;
-  height: 42px;
-  width: 240px;
-  border: none;
-  padding: 4px 8px;
-  font-weight: 600;
-  font-size: 16px;
-  color: ${(props) => props.theme.text};
-  background-color: ${(props) => props.theme.buttonBoxTop};
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
-
-  &:hover {
-    opacity: 0.8;
-  }
-`;
