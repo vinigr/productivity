@@ -4,6 +4,8 @@ import { ThemeProvider } from 'styled-components';
 import { ThemeProvider as ThemeMaterial } from '@material-ui/styles';
 import { createMuiTheme } from '@material-ui/core';
 
+import { SnackbarProvider } from 'notistack';
+
 import { light, dark } from '../styles/theme';
 
 import ThemeContext from './ThemeContext';
@@ -54,7 +56,9 @@ const ThemeContextProvider = ({ children }: Props) => {
       }}
     >
       <ThemeProvider theme={theme === 'light' ? light : dark}>
-        <ThemeMaterial theme={materialtheme}>{children}</ThemeMaterial>
+        <ThemeMaterial theme={materialtheme}>
+          <SnackbarProvider anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}>{children}</SnackbarProvider>
+        </ThemeMaterial>
       </ThemeProvider>
     </ThemeContext.Provider>
   );
