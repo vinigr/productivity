@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { toast } from 'react-toastify';
+import { useSnackbar } from 'notistack';
 import { useNavigate } from 'react-router';
 
 import { Wrapper, Form, Title, Label, Input, Options, LinkChangeAuth, ButtonAdd, ArrowIcon } from './styles';
@@ -13,11 +13,12 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar();
 
   const login = async (e: any) => {
     e.preventDefault();
     if (!email || !password) {
-      return toast('Por favor, preencha todos os campos!', { type: 'warning' });
+      return enqueueSnackbar('Por favor, preencha todos os campos!', { variant: 'warning' });
     }
 
     setLoading(true);
@@ -32,7 +33,7 @@ const Login = () => {
       setLoading(false);
       return navigate('/');
     } catch (error) {
-      toast('Erro ao fazer login!', { type: 'error' });
+      enqueueSnackbar('Erro ao fazer login!', { variant: 'error' });
       setLoading(false);
     }
   };

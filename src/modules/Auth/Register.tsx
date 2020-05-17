@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
-import { toast } from 'react-toastify';
+import { useSnackbar } from 'notistack';
 
 import { Wrapper, Form, Title, Label, Input, Options, LinkChangeAuth, ButtonAdd, ArrowIcon } from './styles';
 import Loading from '../common/Loading';
-import AuthService from '../../services/auth';
 import api from '../../services/api';
 
 const Register = () => {
@@ -14,28 +13,27 @@ const Register = () => {
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar();
 
   const register = async (e: any) => {
     e.preventDefault();
 
     if (!username || !email || !password) {
-      return toast('Por favor, preencha todos os campos!', { type: 'warning' });
+      return enqueueSnackbar('Por favor, preencha todos os campos!', { variant: 'warning' });
     }
 
     setLoading(true);
     try {
-      const { data } = await api.post('users', {
+      await api.post('users', {
         username,
         email,
         password,
       });
 
-      AuthService.setToken(data.token);
-
       setLoading(false);
-      return navigate('/');
+      return navigate('/login');
     } catch (error) {
-      toast('Erro ao fazer login!', { type: 'error' });
+      enqueueSnackbar('Erro ao fazer login!', { variant: 'error' });
       setLoading(false);
     }
   };
