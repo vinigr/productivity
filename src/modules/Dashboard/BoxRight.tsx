@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { AddBox } from '@styled-icons/material-rounded';
+import { AddBox, Refresh } from '@styled-icons/material-rounded';
 import { Link } from 'react-router-dom';
 
 const Box = () => {
@@ -8,15 +8,27 @@ const Box = () => {
     <Wrapper>
       <WrapperTitle>
         <Title>Meus projetos</Title>
-        <Link to="/new-project">
-          <AddBoxIcon />
-        </Link>
+        <div>
+          <ButtonRefresh>
+            <RefreshIcon />
+          </ButtonRefresh>
+
+          <Link to="/new-project">
+            <AddBoxIcon />
+          </Link>
+        </div>
       </WrapperTitle>
       <WrapperTitle>
         <Title>Minhas atividades</Title>
-        <Link to="/new-activity">
-          <AddBoxIcon />
-        </Link>
+        <div>
+          <ButtonRefresh>
+            <RefreshIcon />
+          </ButtonRefresh>
+
+          <Link to="/new-activity">
+            <AddBoxIcon />
+          </Link>
+        </div>
       </WrapperTitle>
     </Wrapper>
   );
@@ -52,6 +64,17 @@ const Title = styled.h2`
 `;
 
 const AddBoxIcon = styled(AddBox)`
+  color: ${(props) => props.theme.titleBoxRight};
+  width: 24px;
+`;
+
+const ButtonRefresh = styled.button`
+  border: none;
+  background-color: transparent;
+  margin-right: 4px;
+`;
+
+const RefreshIcon = styled(Refresh)`
   color: ${(props) => props.theme.titleBoxRight};
   width: 24px;
 `;
