@@ -35,6 +35,11 @@ const initialLists: IList[] = [
     creatable: false,
     cards: [],
   },
+  {
+    title: 'Pausado',
+    creatable: false,
+    cards: [],
+  },
   { title: 'Concluído', creatable: false, cards: [] },
 ];
 
@@ -60,19 +65,13 @@ const Project = () => {
     try {
       const { data } = await api.get(`projects/${params.id}/activities`);
 
-      const activities = data.data;
-
-      const activitiesTodo = activities.filter((activity: IActivity) => activity.status === 'to do');
-      const activitiesDoing = activities.filter((activity: IActivity) => activity.status === 'doing');
-      const activitiesStopped = activities.filter((activity: IActivity) => activity.status === 'stopped');
-      const activitiesDone = activities.filter((activity: IActivity) => activity.status === 'done');
-
       setLists(
         produce(lists, (draft) => {
-          draft[0].cards = activitiesTodo;
-          draft[1].cards = activitiesDoing;
-          draft[2].cards = activitiesStopped;
-          draft[3].cards = activitiesDone;
+          draft[0].cards = data.toDo.data;
+          draft[1].cards = data.doing.data;
+          draft[2].cards = data.stopped.data;
+          draft[3].cards = data.paused.data;
+          draft[4].cards = data.done.data;
         }),
       );
     } catch (error) {}
@@ -106,7 +105,6 @@ const Project = () => {
 
   const handleDrop = useCallback(
     (index, item) => {
-      console.log(index);
       if (!isMovingCard) {
         setLists(
           produce(lists, (draft) => {
@@ -123,12 +121,16 @@ const Project = () => {
   );
 
   const move = (fromList: any, toList: any, from: any, to: any) => {
+    console.log(fromList);
     setLists(
       produce(lists, (draft) => {
         const dragged = draft[fromList].cards[from];
-        setIsMovingCard(true);
-        draft[fromList].cards.splice(from, 1);
-        draft[toList].cards.splice(to, 0, dragged);
+
+        if (fromList !== toList) {
+          setIsMovingCard(true);
+          draft[fromList].cards.splice(from, 1);
+          draft[toList].cards.splice(to, 0, dragged);
+        }
       }),
     );
   };
