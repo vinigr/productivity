@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
+
 import { KeyboardDatePicker } from '@material-ui/pickers';
 import { Select, MenuItem } from '@material-ui/core';
 import { useSnackbar } from 'notistack';
 import { useNavigate } from 'react-router';
 
-import { Wrapper, Input, Label, TextArea, ButtonAdd } from './styles';
+import { Input, Label, TextArea, ButtonAdd } from './styles';
 
 import api from '../../services/api';
 import Loading from '../common/Loading';
@@ -25,7 +27,7 @@ const Form = () => {
     e.preventDefault();
 
     if (!name) {
-      return enqueueSnackbar('O nome é obrigatório!', { variant: 'error' });
+      return enqueueSnackbar('O nome é obrigatório!', { variant: 'warning' });
     }
 
     setLoading(true);
@@ -99,3 +101,11 @@ const Form = () => {
 };
 
 export default Form;
+
+export const Wrapper = styled.section`
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  width: 100%;
+  margin-top: 60px;
+`;
