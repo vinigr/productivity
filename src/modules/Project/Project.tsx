@@ -1,13 +1,17 @@
-import React, { useState, createContext, useCallback } from 'react';
+import React, { useState, createContext, useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 import produce from 'immer';
+import { useParams } from 'react-router';
 
 import { ContainerTop, Title } from './styles';
 
+import NewActivityModal from '../common/NewActivityModal';
+
 import { IActivity } from '../../interfaces';
 
-import { loadLists } from './data';
 import List from './List';
+
+import api from '../../services/api';
 
 interface IList {
   title: string;
@@ -15,7 +19,24 @@ interface IList {
   cards: IActivity[];
 }
 
-const data = loadLists();
+const initialLists: IList[] = [
+  {
+    title: 'A fazer',
+    creatable: true,
+    cards: [],
+  },
+  {
+    title: 'Fazendo',
+    creatable: false,
+    cards: [],
+  },
+  {
+    title: 'Parado',
+    creatable: false,
+    cards: [],
+  },
+  { title: 'Concluído', creatable: false, cards: [] },
+];
 
 interface IContext {
   lists: IList[];
@@ -25,13 +46,49 @@ interface IContext {
 export const BoardContext = createContext<IContext>({ lists: [], move: () => {} });
 
 const Project = () => {
-  const [lists, setLists] = useState<IList[]>(data);
+  const [lists, setLists] = useState<IList[]>(initialLists);
   const [isMovingCard, setIsMovingCard] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
-  // const addActivityList = (activity: IActivity) => {
-  //   setActivities([...activities, { ...activity }]);
-  //   console.log(JSON.stringify(activity));
-  // };
+  const params = useParams();
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const { data } = await api.get(`projects/${params.id}/activities`);
+
+      const activities = data.data;
+
+      const activitiesTodo = activities.filter((activity: IActivity) => activity.status === 'to do');
+      const activitiesDoing = activities.filter((activity: IActivity) => activity.status === 'doing');
+      const activitiesStopped = activities.filter((activity: IActivity) => activity.status === 'stopped');
+      const activitiesDone = activities.filter((activity: IActivity) => activity.status === 'done');
+
+      setLists(
+        produce(lists, (draft) => {
+          draft[0].cards = activitiesTodo;
+          draft[1].cards = activitiesDoing;
+          draft[2].cards = activitiesStopped;
+          draft[3].cards = activitiesDone;
+        }),
+      );
+    } catch (error) {}
+  };
+
+  const addActivity = (activity: IActivity) => {
+    setLists(
+      produce(lists, (draft) => {
+        draft[0].cards.push(activity);
+      }),
+    );
+  };
+
+  const toggleModal = () => {
+    setIsOpen(!isOpen);
+  };
 
   // const deleteActivity = (id: number) => {
   //   const activityLocal = activities.find((activity) => activity.idLocal === id);
@@ -66,7 +123,6 @@ const Project = () => {
   );
 
   const move = (fromList: any, toList: any, from: any, to: any) => {
-    console.log('teste');
     setLists(
       produce(lists, (draft) => {
         const dragged = draft[fromList].cards[from];
@@ -90,11 +146,13 @@ const Project = () => {
               onDrop={(item: any) => handleDrop(index, item)}
               key={`${list.title} - ${index}`}
               index={index}
+              {...(list.creatable && { toggleModal })}
               data={list}
             />
           ))}
         </Content>
       </Wrapper>
+      <NewActivityModal isOpen={isOpen} toggleModal={toggleModal} addActivity={addActivity} />
     </BoardContext.Provider>
   );
 };

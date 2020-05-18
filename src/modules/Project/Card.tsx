@@ -69,8 +69,7 @@ const Card = ({ data, index, listIndex }: ICard) => {
     <Wrapper ref={ref} isDragging={isDragging}>
       <DivTop>
         <div>
-          <Name>{data.name}</Name>
-          <NameProject>Teste</NameProject>
+          <Name>{data.description}</Name>
         </div>
         <ButtonAdd>
           <EditIcon />
@@ -97,7 +96,7 @@ const Wrapper = styled.li<{ isDragging: any }>`
   ${(props) =>
     props.isDragging &&
     css`
-      border: 2px dashed rgba(0, 0, 0, 0.2);
+      border: 2px dashed ${(props) => props.theme.text};
       padding-top: 31px;
       border-radius: 0;
       background: transparent;

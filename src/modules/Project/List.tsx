@@ -18,16 +18,17 @@ interface IList {
   accepts: string[];
   connectDropTarget: any;
   onDrop: any;
+  toggleModal?: () => any;
 }
 
-const List = ({ data, index: listIndex, connectDropTarget }: IList) => {
+const List = ({ data, index: listIndex, connectDropTarget, toggleModal }: IList) => {
   return connectDropTarget(
     <div>
       <Wrapper>
         <Header>
           <Title>{data.title}</Title>
           {data.creatable && (
-            <ButtonAdd>
+            <ButtonAdd onClick={toggleModal}>
               <AddBoxIcon />
             </ButtonAdd>
           )}
