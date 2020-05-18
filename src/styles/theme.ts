@@ -10,6 +10,9 @@ export const light = {
   text: '#131313',
   buttonBoxTop: '#fff',
   border: '#9e9e9e',
+  activityProject: '#ECECEC',
+  itemList: '#fff',
+  titleItemList: '#4F4F4F',
 };
 
 export const dark = {
@@ -24,4 +27,7 @@ export const dark = {
   text: '#fff',
   buttonBoxTop: '#030303',
   border: '#484849',
+  activityProject: '#4F4F4F',
+  itemList: '#101010',
+  titleItemList: '#F5F5F5',
 };
