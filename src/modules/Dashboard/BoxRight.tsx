@@ -1,9 +1,26 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { AddBox, Refresh } from '@styled-icons/material-rounded';
 import { Link } from 'react-router-dom';
 
+import api from '../../services/api';
+
+import { IProject } from '../../interfaces';
+
 const Box = () => {
+  const [projects, setProjects] = useState<IProject[]>([]);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const { data } = await api.get('/projects');
+      setProjects(data.data);
+    } catch (error) {}
+  };
+
   return (
     <Wrapper>
       <WrapperTitle>
@@ -18,6 +35,11 @@ const Box = () => {
           </Link>
         </div>
       </WrapperTitle>
+      {projects.map((project) => (
+        <Project key={project.id} to={`/project/${project.id}`}>
+          <NameProject>{project.name}</NameProject>
+        </Project>
+      ))}
       <WrapperTitle>
         <Title>Minhas atividades</Title>
         <div>
@@ -39,7 +61,8 @@ export default Box;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 20px 0;
+
+  padding: 20px 10px;
   background-color: ${(props) => props.theme.immutableBoxes};
   min-height: 100vh;
   height: 100%;
@@ -52,10 +75,9 @@ const Wrapper = styled.div`
 
 const WrapperTitle = styled.div`
   display: flex;
-  padding: 0 16px;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
+  margin-bottom: 4px;
 `;
 
 const Title = styled.h2`
@@ -77,4 +99,26 @@ const ButtonRefresh = styled.button`
 const RefreshIcon = styled(Refresh)`
   color: ${(props) => props.theme.titleBoxRight};
   width: 24px;
+`;
+
+const Project = styled(Link)`
+  background-color: ${(props) => props.theme.itemList};
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  margin-bottom: 6px;
+  text-decoration: none;
+
+  &::last-child {
+    margin-bottom: 10px;
+  }
+`;
+
+const NameProject = styled.h2`
+  font-weight: 600;
+  font-size: 18px;
+  color: ${(props) => props.theme.titleItemList};
+  margin-bottom: 4px;
 `;
