@@ -1,9 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Loading = () => {
+interface ILoading {
+  smaller?: boolean;
+}
+
+const Loading = ({ smaller }: ILoading) => {
   return (
-    <Wrapper>
+    <Wrapper smaller={smaller}>
       <Spinner />
     </Wrapper>
   );
@@ -11,10 +15,10 @@ const Loading = () => {
 
 export default Loading;
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ smaller?: boolean }>`
   display: flex;
   height: 100%;
-  min-height: 100vh;
+  min-height: ${(props) => (props.theme.smaller ? '100%' : '100vh')};
   width: 100%;
   align-items: center;
   justify-content: center;
