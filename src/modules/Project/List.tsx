@@ -35,7 +35,7 @@ const List = ({ data, index: listIndex, connectDropTarget, toggleModal }: IList)
         </Header>
         <ul>
           {data.cards.map((card, index) => (
-            <Card key={`${card.id}_${index}`} listIndex={listIndex} index={index} data={card} />
+            <Card key={card.id} listIndex={listIndex} index={index} data={card} />
           ))}
         </ul>
       </Wrapper>

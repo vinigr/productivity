@@ -105,6 +105,10 @@ const Project = () => {
 
   const handleDrop = useCallback(
     (index, item) => {
+      if (index !== item?.listIndex) {
+        saveChangeStatus(index, lists[item?.listIndex].cards[item?.index]);
+      }
+
       if (!isMovingCard) {
         setLists(
           produce(lists, (draft) => {
@@ -121,7 +125,6 @@ const Project = () => {
   );
 
   const move = (fromList: any, toList: any, from: any, to: any) => {
-    console.log(fromList);
     setLists(
       produce(lists, (draft) => {
         const dragged = draft[fromList].cards[from];
@@ -133,6 +136,10 @@ const Project = () => {
         }
       }),
     );
+  };
+
+  const saveChangeStatus = (listDropped: number, item: IActivity) => {
+    console.log(lists[listDropped].title);
   };
 
   return (
