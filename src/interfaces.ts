@@ -4,6 +4,8 @@ export interface IActivity {
   initial_date?: Date | string | null;
   final_date?: Date | string | null;
   status: string;
+  alert_date?: Date | string | null;
+  priority: string;
 }
 
 export interface IProject {

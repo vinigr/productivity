@@ -29,8 +29,20 @@ const NewActivityModal = ({ isOpen, toggleModal, addActivity }: NewActivityProps
   const { enqueueSnackbar } = useSnackbar();
 
   const saveActivity = async () => {
-    if (!name || !initialDate || !finalDate) {
-      return enqueueSnackbar('Todos os campos são obrigatórios!', { variant: 'warning' });
+    if (!name) {
+      return enqueueSnackbar('O Nome é obrigatório!', { variant: 'warning' });
+    }
+
+    if (!initialDate) {
+      return enqueueSnackbar('A data inicial é obrigatória!', { variant: 'warning' });
+    }
+
+    if (!priority) {
+      return enqueueSnackbar('A priridade é obrigatória!', { variant: 'warning' });
+    }
+
+    if (!alertDate) {
+      return enqueueSnackbar('Data de alerta é obrigatória!', { variant: 'warning' });
     }
 
     try {
@@ -48,9 +60,6 @@ const NewActivityModal = ({ isOpen, toggleModal, addActivity }: NewActivityProps
       return toggleModal();
     } catch (error) {
       enqueueSnackbar('Erro ao cadastrar atividade!', { variant: 'error' });
-    }
-
-    if (!params?.id) {
     }
   };
 
