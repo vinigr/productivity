@@ -2,6 +2,7 @@ import React, { useState, createContext, useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 import produce from 'immer';
 import { useParams } from 'react-router';
+import { useSnackbar } from 'notistack';
 
 import { ContainerTop, Title } from './styles';
 
@@ -61,6 +62,7 @@ const Project = () => {
   const [indexListEdit, setIndexListEdit] = useState<number | null>();
 
   const params = useParams();
+  const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
     fetchData();
@@ -136,28 +138,59 @@ const Project = () => {
     );
   };
 
-  // const accessActivity = (id: number) => {};
-
   const handleDrop = useCallback(
-    (index, item) => {
-      if (index !== item?.listIndex) {
-        saveChangeStatus(index, lists[item?.listIndex].cards[item?.index]);
+    async (index, item) => {
+      if (index === item?.listIndex) {
+        return;
       }
 
-      if (!isMovingCard) {
-        setLists(
-          produce(lists, (draft) => {
-            const dragged = draft[item.listIndex].cards[item.index];
-            draft[item.listIndex].cards.splice(item.index, 1);
-            draft[index].cards.push(dragged);
-          }),
-        );
-      } else {
-        setIsMovingCard(false);
-      }
+      saveChangeStatus(index, item);
     },
     [lists],
   );
+
+  const saveChangeStatus = async (index: number, item: any) => {
+    if (index === 2 || index === 3) {
+      await saveInterruption(item, index);
+    }
+  };
+
+  const saveListChange = (index: number, item: any) => {
+    if (!isMovingCard) {
+      setLists(
+        produce(lists, (draft) => {
+          const dragged = draft[item.listIndex].cards[item.index];
+          draft[item.listIndex].cards.splice(item.index, 1);
+          draft[index].cards.push(dragged);
+        }),
+      );
+    } else {
+      setIsMovingCard(false);
+    }
+  };
+
+  const saveInterruption = async (item: any, index: number) => {
+    const { id } = lists[item.listIndex].cards[item.index];
+
+    const typePtBr = index === 2 ? 'parada' : 'pausa';
+
+    const reason = prompt(`Qual o motivo da ${typePtBr}?`);
+
+    const type = index === 2 ? 'stop' : 'pause';
+
+    try {
+      await api.post(`projects/${params.id}/activities/${id}/interruptions`, {
+        description: reason,
+        type,
+      });
+
+      saveListChange(index, item);
+      enqueueSnackbar('Interrupção salva com sucesso!', { variant: 'success' });
+    } catch (error) {
+      enqueueSnackbar('Erro ao salvar interrupção!', { variant: 'error' });
+      return;
+    }
+  };
 
   const move = (fromList: any, toList: any, from: any, to: any) => {
     setLists(
@@ -171,10 +204,6 @@ const Project = () => {
         }
       }),
     );
-  };
-
-  const saveChangeStatus = (listDropped: number, item: IActivity) => {
-    console.log(lists[listDropped].title);
   };
 
   return (
