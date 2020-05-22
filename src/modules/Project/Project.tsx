@@ -119,19 +119,22 @@ const Project = () => {
         draft[indexListEdit!].cards[index] = activity;
       }),
     );
+
+    setIndexListEdit(null);
+    setActivityEdit(null);
   };
 
-  // const deleteActivity = (id: number) => {
-  //   const activityLocal = activities.find((activity) => activity.idLocal === id);
+  const deleteActivity = (id: number) => {
+    setIsOpenEdit(false);
 
-  //   if (activityLocal) {
-  //     const newActivities = activities.filter((activity) => activity.idLocal && activity.idLocal !== 1);
+    setLists(
+      produce(lists, (draft) => {
+        const index = draft[indexListEdit!].cards.findIndex((item) => item.id === id);
 
-  //     setActivities(newActivities);
-  //   }
-
-  //   console.log(id);
-  // };
+        draft[indexListEdit!].cards.splice(index, 1);
+      }),
+    );
+  };
 
   // const accessActivity = (id: number) => {};
 
@@ -201,6 +204,7 @@ const Project = () => {
           toggleModal={closeModalEdit}
           activity={activityEdit}
           editActivity={saveEditActivity}
+          deleteActivity={deleteActivity}
         />
       )}
     </BoardContext.Provider>

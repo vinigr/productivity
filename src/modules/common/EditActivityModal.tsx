@@ -17,9 +17,10 @@ interface NewActivityProps {
   toggleModal: () => any;
   activity: IActivity;
   editActivity: (activity: IActivity) => any;
+  deleteActivity: (id: number) => any;
 }
 
-const EditActivityModal = ({ isOpen, toggleModal, activity, editActivity }: NewActivityProps) => {
+const EditActivityModal = ({ isOpen, toggleModal, activity, editActivity, deleteActivity }: NewActivityProps) => {
   const [name, setName] = useState<string>('');
   const [initialDate, setInitialDate] = useState<Date | null | string | undefined>(null);
   const [finalDate, setFinalDate] = useState<Date | null | string | undefined>(null);
@@ -126,8 +127,10 @@ const EditActivityModal = ({ isOpen, toggleModal, activity, editActivity }: NewA
           style={{ width: 240, marginBottom: 14 }}
         />
       </Form>
-
-      <ButtonAdd onClick={saveActivity}>Salvar</ButtonAdd>
+      <Options>
+        <ButtonDelete onClick={() => deleteActivity(activity.id)}>Deletar</ButtonDelete>
+        <ButtonAdd onClick={saveActivity}>Salvar</ButtonAdd>
+      </Options>
     </StyledModal>
   );
 };
@@ -188,9 +191,31 @@ const Input = styled.input`
   }
 `;
 
+const Options = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 14px;
+`;
+
+const ButtonDelete = styled.button`
+  border-radius: 2px;
+  height: 42px;
+  width: 160px;
+  border: none;
+  padding: 4px 8px;
+  font-weight: 600;
+  font-size: 16px;
+  color: #fff;
+  background-color: #de0000;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    opacity: 0.8;
+  }
+`;
+
 const ButtonAdd = styled.button`
-  align-self: flex-end;
-  margin-right: 10px;
   border-radius: 2px;
   height: 42px;
   width: 160px;
