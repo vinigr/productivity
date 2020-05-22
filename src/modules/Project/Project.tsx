@@ -126,16 +126,24 @@ const Project = () => {
     setActivityEdit(null);
   };
 
-  const deleteActivity = (id: number) => {
+  const deleteActivity = async (id: number) => {
     setIsOpenEdit(false);
 
-    setLists(
-      produce(lists, (draft) => {
-        const index = draft[indexListEdit!].cards.findIndex((item) => item.id === id);
+    try {
+      await api.delete(`projects/${params.id}/activities/${id}`);
 
-        draft[indexListEdit!].cards.splice(index, 1);
-      }),
-    );
+      enqueueSnackbar('Atividade deletada com sucesso!', { variant: 'success' });
+
+      setLists(
+        produce(lists, (draft) => {
+          const index = draft[indexListEdit!].cards.findIndex((item) => item.id === id);
+
+          draft[indexListEdit!].cards.splice(index, 1);
+        }),
+      );
+    } catch (error) {
+      enqueueSnackbar('Erro ao deletar atividade!', { variant: 'error' });
+    }
   };
 
   const handleDrop = useCallback(
@@ -153,6 +161,10 @@ const Project = () => {
     if (index === 2 || index === 3) {
       await saveInterruption(item, index);
     }
+
+    // if (index === 1 && (item?.listIndex === 2 || item?.listIndex === 3)) {
+    //   await saveFinishInterruption(item);
+    // }
   };
 
   const saveListChange = (index: number, item: any) => {
@@ -191,6 +203,20 @@ const Project = () => {
       return;
     }
   };
+
+  // const saveFinishInterruption = async (item: any) => {
+  //   const { id } = lists[item.listIndex].cards[item.index];
+
+  //   try {
+  //     await api.put(`projects/${params.id}/activities/${id}/interruptions`);
+
+  //     saveListChange(index, item);
+  //     enqueueSnackbar('Interrupção salva com sucesso!', { variant: 'success' });
+  //   } catch (error) {
+  //     enqueueSnackbar('Erro ao salvar interrupção!', { variant: 'error' });
+  //     return;
+  //   }
+  // };
 
   const move = (fromList: any, toList: any, from: any, to: any) => {
     setLists(
