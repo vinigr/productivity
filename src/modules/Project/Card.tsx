@@ -12,9 +12,10 @@ interface ICard {
   data: IActivity;
   index: number;
   listIndex: number;
+  openModalEdit: (activity: IActivity, listIndex: number) => any;
 }
 
-const Card = ({ data, index, listIndex }: ICard) => {
+const Card = ({ data, index, listIndex, openModalEdit }: ICard) => {
   const ref = useRef<any>();
   const { move } = useContext(BoardContext);
 
@@ -71,7 +72,7 @@ const Card = ({ data, index, listIndex }: ICard) => {
         <div>
           <Name>{data.description}</Name>
         </div>
-        <ButtonAdd>
+        <ButtonAdd onClick={() => openModalEdit(data, listIndex)}>
           <EditIcon />
         </ButtonAdd>
       </DivTop>

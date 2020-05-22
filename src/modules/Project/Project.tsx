@@ -12,6 +12,7 @@ import { IActivity } from '../../interfaces';
 import List from './List';
 
 import api from '../../services/api';
+import EditActivityModal from '../common/EditActivityModal';
 
 interface IList {
   title: string;
@@ -55,6 +56,10 @@ const Project = () => {
   const [isMovingCard, setIsMovingCard] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
+  const [isOpenEdit, setIsOpenEdit] = useState(false);
+  const [activityEdit, setActivityEdit] = useState<IActivity | null>();
+  const [indexListEdit, setIndexListEdit] = useState<number | null>();
+
   const params = useParams();
 
   useEffect(() => {
@@ -87,6 +92,33 @@ const Project = () => {
 
   const toggleModal = () => {
     setIsOpen(!isOpen);
+    setIndexListEdit(null);
+  };
+
+  const openModalEdit = (activity: IActivity, listIndex: number) => {
+    setActivityEdit(activity);
+    setIsOpenEdit(true);
+    setIndexListEdit(listIndex);
+  };
+
+  const closeModalEdit = () => {
+    setIsOpenEdit(false);
+    setIndexListEdit(null);
+    setActivityEdit(null);
+  };
+
+  const saveEditActivity = (activity: IActivity) => {
+    if (indexListEdit === undefined || indexListEdit === null) {
+      return;
+    }
+
+    setLists(
+      produce(lists, (draft) => {
+        const index = draft[indexListEdit!].cards.findIndex((item) => item.id === activity.id);
+        console.log(index);
+        draft[indexListEdit!].cards[index] = activity;
+      }),
+    );
   };
 
   // const deleteActivity = (id: number) => {
@@ -157,11 +189,20 @@ const Project = () => {
               index={index}
               {...(list.creatable && { toggleModal })}
               data={list}
+              openModalEdit={openModalEdit}
             />
           ))}
         </Content>
       </Wrapper>
       <NewActivityModal isOpen={isOpen} toggleModal={toggleModal} addActivity={addActivity} />
+      {activityEdit && (
+        <EditActivityModal
+          isOpen={isOpenEdit}
+          toggleModal={closeModalEdit}
+          activity={activityEdit}
+          editActivity={saveEditActivity}
+        />
+      )}
     </BoardContext.Provider>
   );
 };

@@ -19,9 +19,10 @@ interface IList {
   connectDropTarget: any;
   onDrop: any;
   toggleModal?: () => any;
+  openModalEdit: (activity: IActivity, listIndex: number) => any;
 }
 
-const List = ({ data, index: listIndex, connectDropTarget, toggleModal }: IList) => {
+const List = ({ data, index: listIndex, connectDropTarget, toggleModal, openModalEdit }: IList) => {
   return connectDropTarget(
     <div>
       <Wrapper>
@@ -35,7 +36,7 @@ const List = ({ data, index: listIndex, connectDropTarget, toggleModal }: IList)
         </Header>
         <ul>
           {data.cards.map((card, index) => (
-            <Card key={card.id} listIndex={listIndex} index={index} data={card} />
+            <Card key={card.id} listIndex={listIndex} index={index} data={card} openModalEdit={openModalEdit} />
           ))}
         </ul>
       </Wrapper>
