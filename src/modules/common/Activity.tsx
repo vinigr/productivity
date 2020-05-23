@@ -5,13 +5,13 @@ import { Edit } from '@styled-icons/material-rounded';
 
 import { IActivity } from '../../interfaces';
 
-const Activity = ({ activity: { id, description, final_date } }: { activity: IActivity }) => {
+const Activity = ({ activity: { id, description, final_date, project } }: { activity: IActivity }) => {
   return (
     <Wrapper>
       <DivTop>
         <div>
           <Name>{description}</Name>
-          <NameProject>Teste</NameProject>
+          <NameProject>{project}</NameProject>
         </div>
         <ButtonAdd>
           <EditIcon />
