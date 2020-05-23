@@ -125,12 +125,6 @@ const Name = styled.h2`
   margin-bottom: 4px;
 `;
 
-const NameProject = styled.h3`
-  font-weight: 400;
-  font-size: 14px;
-  color: ${(props) => props.theme.text};
-`;
-
 const ButtonAdd = styled.button`
   border: none;
   background-color: transparent;
