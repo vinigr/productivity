@@ -162,9 +162,13 @@ const Project = () => {
       return;
     }
 
-    // if (index === 1 && item?.listIndex === 1) {
-    //   return await saveStartActivity(item, index);
-    // }
+    if ((index === 2 || index === 3) && item?.listIndex === 4) {
+      return;
+    }
+
+    if (index === 1 && item?.listIndex === 0) {
+      return await saveStartActivity(item);
+    }
 
     if (index === 2 || index === 3) {
       return await saveInterruption(item, index);
@@ -190,6 +194,20 @@ const Project = () => {
       );
     } else {
       setIsMovingCard(false);
+    }
+  };
+
+  const saveStartActivity = async (item: any) => {
+    const { id } = lists[item.listIndex].cards[item.index];
+
+    try {
+      await api.put(`projects/${params.id}/activities/${id}/start`);
+
+      saveListChange(1, item);
+      enqueueSnackbar('Atividade iniciada com sucesso!', { variant: 'success' });
+    } catch (error) {
+      enqueueSnackbar('Erro ao iniciar atividade!', { variant: 'error' });
+      return;
     }
   };
 

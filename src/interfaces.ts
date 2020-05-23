@@ -6,6 +6,7 @@ export interface IActivity {
   status: string;
   alert_date?: Date | string | null;
   priority: string;
+  project?: string;
 }
 
 export interface IProject {
