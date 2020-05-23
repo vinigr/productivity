@@ -12,6 +12,8 @@ const Home = lazy(() => import('./modules/Home/Home'));
 
 const Project = lazy(() => import('./modules/Project/Project'));
 const NewProject = lazy(() => import('./modules/Project/NewProject'));
+const EditProject = lazy(() => import('./modules/Project/EditProject'));
+
 const Interruptions = lazy(() => import('./modules/Project/Interruptions'));
 
 const NewActivity = lazy(() => import('./modules/Activity/NewActivity'));
@@ -45,6 +47,7 @@ const RoutesApp = () => {
             <Route path="new-project" element={<NewProject />} />
             <Route path="new-activity" element={<NewActivity />} />
             <Route path="project/:id/interruptions" element={<Interruptions />} />
+            <Route path="project/:id/edit" element={<EditProject />} />
           </PrivateRoute>
         </Routes>
       </Suspense>
