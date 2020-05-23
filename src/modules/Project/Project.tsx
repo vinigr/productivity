@@ -158,13 +158,25 @@ const Project = () => {
   );
 
   const saveChangeStatus = async (index: number, item: any) => {
-    if (index === 2 || index === 3) {
-      await saveInterruption(item, index);
+    if ((index === 2 && item?.listIndex === 3) || (index === 3 && item?.listIndex === 2)) {
+      return;
     }
 
-    // if (index === 1 && (item?.listIndex === 2 || item?.listIndex === 3)) {
-    //   await saveFinishInterruption(item);
+    // if (index === 1 && item?.listIndex === 1) {
+    //   return await saveStartActivity(item, index);
     // }
+
+    if (index === 2 || index === 3) {
+      return await saveInterruption(item, index);
+    }
+
+    if (index === 1 && (item?.listIndex === 2 || item?.listIndex === 3)) {
+      return await saveFinishInterruption(item);
+    }
+
+    if ((item?.listIndex === 0 || item?.listIndex === 1) && index === 4) {
+      return await saveFinishActivity(item);
+    }
   };
 
   const saveListChange = (index: number, item: any) => {
@@ -204,19 +216,33 @@ const Project = () => {
     }
   };
 
-  // const saveFinishInterruption = async (item: any) => {
-  //   const { id } = lists[item.listIndex].cards[item.index];
+  const saveFinishInterruption = async (item: any) => {
+    const { id } = lists[item.listIndex].cards[item.index];
 
-  //   try {
-  //     await api.put(`projects/${params.id}/activities/${id}/interruptions`);
+    try {
+      await api.put(`projects/${params.id}/activities/${id}/interruptions/finish`);
 
-  //     saveListChange(index, item);
-  //     enqueueSnackbar('Interrupção salva com sucesso!', { variant: 'success' });
-  //   } catch (error) {
-  //     enqueueSnackbar('Erro ao salvar interrupção!', { variant: 'error' });
-  //     return;
-  //   }
-  // };
+      saveListChange(1, item);
+      enqueueSnackbar('Status alterado com sucesso!', { variant: 'success' });
+    } catch (error) {
+      enqueueSnackbar('Erro ao salvar alteração do status!', { variant: 'error' });
+      return;
+    }
+  };
+
+  const saveFinishActivity = async (item: any) => {
+    const { id } = lists[item.listIndex].cards[item.index];
+
+    try {
+      await api.put(`projects/${params.id}/activities/${id}/finish`);
+
+      saveListChange(4, item);
+      enqueueSnackbar('Atividade finalizada com sucesso!', { variant: 'success' });
+    } catch (error) {
+      enqueueSnackbar('Erro ao finalizar atividade!', { variant: 'error' });
+      return;
+    }
+  };
 
   const move = (fromList: any, toList: any, from: any, to: any) => {
     setLists(
