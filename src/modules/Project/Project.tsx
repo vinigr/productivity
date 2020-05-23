@@ -1,10 +1,11 @@
 import React, { useState, createContext, useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 import produce from 'immer';
-import { useParams } from 'react-router';
+import { Link, useParams } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
+import { Edit } from '@styled-icons/material-rounded';
 
-import { ContainerTop, Title } from './styles';
+import { ContainerTop } from './styles';
 
 import NewActivityModal from '../common/NewActivityModal';
 
@@ -280,7 +281,13 @@ const Project = () => {
     <BoardContext.Provider value={{ lists, move }}>
       <Wrapper>
         <ContainerTop>
-          <Title>Projeto</Title>
+          <LinkTop to={`/project/${params.id}`}>Projeto</LinkTop>
+          <Options>
+            <LinkOption to={`/project/${params.id}/interruptions`}>Interrupções</LinkOption>
+            <LinkOption to={`/project/${params.id}/edit`}>
+              <EditIcon />
+            </LinkOption>
+          </Options>
         </ContainerTop>
         <Content>
           {lists.map((list, index): any => (
@@ -326,4 +333,27 @@ const Content = styled.div`
 
   overflow-y: hidden;
   overflow-x: scroll;
+`;
+
+const LinkTop = styled(Link)`
+  font-weight: 700;
+  font-size: 24px;
+  color: ${(props) => props.theme.text};
+  text-decoration: none;
+`;
+
+const Options = styled.div`
+  display: flex;
+`;
+
+const LinkOption = styled(Link)`
+  font-size: 18px;
+  color: ${(props) => props.theme.text};
+  text-decoration: none;
+  margin: 0 10px;
+`;
+
+const EditIcon = styled(Edit)`
+  color: ${(props) => props.theme.titleBoxRight};
+  width: 20px;
 `;
