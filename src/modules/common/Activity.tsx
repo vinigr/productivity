@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { format } from 'date-fns';
-import { Edit } from '@styled-icons/material-rounded';
+// import { Edit } from '@styled-icons/material-rounded';
 
 import { IActivity } from '../../interfaces';
 
@@ -13,15 +13,9 @@ const Activity = ({ activity: { id, description, final_date, project } }: { acti
           <Name>{description}</Name>
           <NameProject>{project}</NameProject>
         </div>
-        <ButtonAdd>
-          <EditIcon />
-        </ButtonAdd>
       </DivTop>
 
-      <DivBottom>
-        <Term>Prazo: {final_date && format(new Date(final_date), 'dd/LL HH:mm')}</Term>
-        <ButtonComplete>Concluir</ButtonComplete>
-      </DivBottom>
+      <DivBottom>{final_date && <Term>Prazo: {format(new Date(final_date), 'dd/LL HH:mm')}</Term>}</DivBottom>
     </Wrapper>
   );
 };
@@ -58,15 +52,15 @@ const NameProject = styled.h3`
   color: ${(props) => props.theme.text};
 `;
 
-const ButtonAdd = styled.button`
-  border: none;
-  background-color: transparent;
-`;
+// const ButtonAdd = styled.button`
+//   border: none;
+//   background-color: transparent;
+// `;
 
-const EditIcon = styled(Edit)`
-  color: ${(props) => props.theme.titleBoxRight};
-  width: 20px;
-`;
+// const EditIcon = styled(Edit)`
+//   color: ${(props) => props.theme.titleBoxRight};
+//   width: 20px;
+// `;
 
 const DivBottom = styled.div`
   display: flex;
@@ -80,14 +74,14 @@ const Term = styled.h4`
   color: ${(props) => props.theme.text};
 `;
 
-const ButtonComplete = styled.button`
-  border: none;
-  background: #07922e;
-  border-radius: 4px;
-  color: #fff;
-  padding: 10px;
+// const ButtonComplete = styled.button`
+//   border: none;
+//   background: #07922e;
+//   border-radius: 4px;
+//   color: #fff;
+//   padding: 10px;
 
-  &:hover {
-    opacity: 0.8;
-  }
-`;
+//   &:hover {
+//     opacity: 0.8;
+//   }
+// `;

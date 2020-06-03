@@ -40,18 +40,6 @@ const Box = () => {
           <NameProject>{project.name}</NameProject>
         </Project>
       ))}
-      <WrapperTitle>
-        <Title>Minhas atividades</Title>
-        <div>
-          <ButtonRefresh>
-            <RefreshIcon />
-          </ButtonRefresh>
-
-          <Link to="/new-activity">
-            <AddBoxIcon />
-          </Link>
-        </div>
-      </WrapperTitle>
     </Wrapper>
   );
 };

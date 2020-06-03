@@ -32,7 +32,7 @@ const Card = ({ data, index, listIndex, openModalEdit }: ICard) => {
     hover(item: any, monitor: any) {
       var date = new Date();
       var now = date.getTime();
-      if (memTime == 0) memTime = now;
+      if (memTime === 0) memTime = now;
       const draggedListIndex = item.listIndex;
       const targetListIndex = listIndex;
 
@@ -55,7 +55,7 @@ const Card = ({ data, index, listIndex, openModalEdit }: ICard) => {
       if (draggedIndex > targetIndex && draggedTop > targetCenter) {
         return;
       }
-      if (now - memTime >= 300 || draggedListIndex == targetListIndex) {
+      if (now - memTime >= 300 || draggedListIndex === targetListIndex) {
         move(draggedListIndex, targetListIndex, draggedIndex, targetIndex);
         item.index = targetIndex;
         item.listIndex = targetListIndex;
@@ -135,11 +135,11 @@ const EditIcon = styled(Edit)`
   width: 20px;
 `;
 
-const DivBottom = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
+// const DivBottom = styled.div`
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+// `;
 
 const Term = styled.h4`
   font-weight: 300;
